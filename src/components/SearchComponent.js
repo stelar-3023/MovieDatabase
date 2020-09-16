@@ -11,7 +11,7 @@ function SearchComponent ({ handleInput, search }) {
         onKeyPress={search}
       />
       <br />
-      <button className="clear">Clear</button>
+      <button className="clear" onClick={clearInput}>Clear</button>
     </section>
   );
 };
