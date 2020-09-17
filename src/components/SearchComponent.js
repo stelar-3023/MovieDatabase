@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchComponent ({ handleInput, search }) {
+function SearchComponent({ handleInput, search }) {
   return (
     <section className="searchbox-wrap">
       <input
@@ -11,9 +11,8 @@ function SearchComponent ({ handleInput, search }) {
         onKeyPress={search}
       />
       <br />
-      <button className="clear" onClick={clearInput}>Clear</button>
     </section>
   );
-};
+}
 
 export default SearchComponent;

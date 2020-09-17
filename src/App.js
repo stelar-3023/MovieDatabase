@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import SearchComponent from "./components/SearchComponent";
 import ResultsComponent from "./components/ResultsComponent";
-import PopupComponent from  "./components/PopupComponent";
+import PopupComponent from "./components/PopupComponent";
 
 function App() {
   const [state, setState] = useState({
     s: "",
     results: [],
-    selected: {}
+    selected: {},
   });
+
   const apiurl = "http://www.omdbapi.com/?apikey=dfe6d885";
 
   const search = (e) => {
@@ -17,38 +18,38 @@ function App() {
       axios(apiurl + "&s=" + state.s).then(({ data }) => {
         let results = data.Search;
 
-        setState(prevState => {
-          return { ...prevState, results: results }
-        })
+        setState((prevState) => {
+          return { ...prevState, results: results };
+        });
       });
     }
-  }
-  
+  };
+
   const handleInput = (e) => {
     let s = e.target.value;
 
-    setState(prevState => {
-      return { ...prevState, s: s }
+    setState((prevState) => {
+      return { ...prevState, s: s };
     });
-  }
+  };
 
-  const openPopup = id => {
+  const openPopup = (id) => {
     axios(apiurl + "&i=" + id).then(({ data }) => {
       let result = data;
 
       console.log(result);
 
-      setState(prevState => {
-        return { ...prevState, selected: result }
+      setState((prevState) => {
+        return { ...prevState, selected: result };
       });
     });
-  }
+  };
 
   const closePopup = () => {
-    setState(prevState => {
-      return { ...prevState, selected: {} }
+    setState((prevState) => {
+      return { ...prevState, selected: {} };
     });
-  }
+  };
 
   return (
     <div className="App">
@@ -60,10 +61,14 @@ function App() {
 
         <ResultsComponent results={state.results} openPopup={openPopup} />
 
-        {(typeof state.selected.Title != "undefined") ? <PopupComponent selected={state.selected} closePopup={closePopup} /> : false}
+        {typeof state.selected.Title != "undefined" ? (
+          <PopupComponent selected={state.selected} closePopup={closePopup} />
+        ) : (
+          false
+        )}
       </main>
     </div>
   );
 }
 
-export default App
+export default App;
